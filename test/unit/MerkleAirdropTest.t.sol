@@ -13,13 +13,13 @@ contract MerkleAirdropTest is ZkSyncChainChecker, Test {
     MerkleAirdrop public airdrop;
     BagelToken public token;
 
-    bytes32 public merkleRoot = 0xaa5d581231e596618465a56aa0f5870ba6e20785fe436d5bfb82b08662ccc7c4;
+    bytes32 public merkleRoot = 0x1070fa89ab909d1672646ba27fa8290385b29f61250037ce8e2839f875e07c1e;
     bytes32 proofOne = 0x0fd7c981d39bece61f7499702bf59b3114a90e66b51ba2c53abdf7b62986c00a;
     bytes32 proofTwo = 0xe5ebd1e1b5a5478a944ecab36a9a954ac3b6b8216875f6524caa7a1d87096576;
-    bytes32[] proof = [proofOne, proofTwo];
+    bytes32 proofThree = 0x1e15681a1536a349c86a6d15e159eb0176b83923b384a8b224904dbdbf7d80b1;
+    bytes32[] proof = [proofOne, proofTwo, proofThree];
     address user;
     uint256 userPrivKey;
-    address owner;
     address public gasPayer;
     uint256 gasPayerPrivKey;
 
@@ -27,17 +27,16 @@ contract MerkleAirdropTest is ZkSyncChainChecker, Test {
     uint256 constant AMOUNT_TO_MINT = AMOUNT_TO_CLAIM * 4;
 
     function setUp() public {
-        owner = makeAddr("owner");
         if (!isZkSyncChain()) {
             // deploy with a script
             DeployMerkleAirdrop deployer = new DeployMerkleAirdrop();
             (airdrop, token) = deployer.run();
-        } else {
-            vm.prank(owner);
+        } else {   
             token = new BagelToken();
             airdrop = new MerkleAirdrop(merkleRoot, token);
-            token.mint(address(airdrop), AMOUNT_TO_MINT);
         }
+        vm.prank(token.owner());
+        token.mint(address(airdrop), AMOUNT_TO_MINT);
         (user, userPrivKey) = makeAddrAndKey("user");
         (gasPayer , gasPayerPrivKey) = makeAddrAndKey("gasPayer");
     }

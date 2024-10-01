@@ -7,7 +7,7 @@ import {MerkleAirdrop} from "src/MerkleAirdrop.sol";
 import {IERC20, SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract DeployMerkleAirdrop is Script {
-    bytes32 private s_merkleRoot = 0xaa5d581231e596618465a56aa0f5870ba6e20785fe436d5bfb82b08662ccc7c4;
+    bytes32 private s_merkleRoot = 0x1070fa89ab909d1672646ba27fa8290385b29f61250037ce8e2839f875e07c1e;
     uint256 private s_amountToTransferToAirdrop = 4 * 25 * 1e18;
     function run() external returns(MerkleAirdrop, BagelToken){
         return deployMerkleAirdrop();

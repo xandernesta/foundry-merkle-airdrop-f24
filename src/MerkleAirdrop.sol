@@ -29,11 +29,9 @@ contract MerkleAirdrop is EIP712 {
 
     event Claim(address account, uint256 amount);
 
-    constructor(bytes32 _merkleRoot,IERC20 _airdropToken/* , address[] memory _addresses, uint256 _amount */) EIP712(/* name */ "MerkleAirdrop", /* version */ "1"){
+    constructor(bytes32 _merkleRoot,IERC20 _airdropToken) EIP712(/* name */ "MerkleAirdrop", /* version */ "1"){
         i_merkleRoot = _merkleRoot;
         i_airdropToken = _airdropToken;
-/*         claimers =_addresses;
-        amount =_amount; */
 
     }
     // Merkle Proofs   

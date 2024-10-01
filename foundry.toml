@@ -4,6 +4,9 @@ out = "out"
 libs = ["lib"]
 fs_permissions = [
     { access = "read-write", path = "./script/target/" },
+    { access = "read-write", path = "./broadcast/" },
+    { access = "read-write", path = "./reports/" },
+    { access = "read-write", path = "./signature.txt" },
 ]
 
 remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"]
